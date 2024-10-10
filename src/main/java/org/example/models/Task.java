@@ -1,13 +1,13 @@
 package org.example.models;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Task {
     private int Id;
     private String title;
-    private Date startTime;
-    private Date finishTime;
-    private Date trackedTime;
+    private LocalDateTime startTime;
+    private LocalDateTime finishTime;
     private String status;
 
     public int getId() {
@@ -26,30 +26,6 @@ public class Task {
         this.title = title;
     }
 
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getFinishTime() {
-        return finishTime;
-    }
-
-    public void setFinishTime(Date finishTime) {
-        this.finishTime = finishTime;
-    }
-
-    public Date getTrackedTime() {
-        return trackedTime;
-    }
-
-    public void setTrackedTime(Date trackedTime) {
-        this.trackedTime = trackedTime;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -66,12 +42,27 @@ public class Task {
         this.user = user;
     }
 
-    public Task(int id, String title, Date startTime, Date finishTime, Date trackedTime, String status, User user) {
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getFinishTime() {
+        return finishTime;
+    }
+
+    public void setFinishTime(LocalDateTime finishTime) {
+        this.finishTime = finishTime;
+    }
+
+    public Task(int id, String title, LocalDateTime startTime, LocalDateTime finishTime, String status, User user) {
         Id = id;
         this.title = title;
         this.startTime = startTime;
         this.finishTime = finishTime;
-        this.trackedTime = trackedTime;
         this.status = status;
         this.user = user;
     }
