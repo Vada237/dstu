@@ -1,21 +1,33 @@
 package org.example.models;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Task {
-    private int Id;
+    private int id;
     private String title;
-    private LocalDateTime startTime;
-    private LocalDateTime finishTime;
+    private LocalDateTimeWrapper startTime;
+    private LocalDateTimeWrapper finishTime;
     private String status;
+    private User user;
+    private Project project;
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -41,31 +53,41 @@ public class Task {
     public void setUser(User user) {
         this.user = user;
     }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getFinishTime() {
-        return finishTime;
-    }
-
-    public void setFinishTime(LocalDateTime finishTime) {
-        this.finishTime = finishTime;
-    }
-
-    public Task(int id, String title, LocalDateTime startTime, LocalDateTime finishTime, String status, User user) {
-        Id = id;
+    
+    public Task(
+            int id,
+            String title,
+            LocalDateTimeWrapper startTime,
+            LocalDateTimeWrapper finishTime,
+            String status,
+            User user,
+            Project project
+    ) {
+        this.id = id;
         this.title = title;
         this.startTime = startTime;
         this.finishTime = finishTime;
         this.status = status;
         this.user = user;
+        this.project = project;
     }
 
-    private User user;
+    public Task() {
+        this.startTime = new LocalDateTimeWrapper();
+        this.finishTime = new LocalDateTimeWrapper();
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", startTime=" + startTime +
+                ", finishTime=" + finishTime +
+                ", status='" + status + '\'' +
+                ", user=" + user +
+                ", project=" + project +
+                '}';
+    }
 }
+

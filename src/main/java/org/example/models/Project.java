@@ -31,9 +31,19 @@ public class Project {
         this.tasks = tasks;
     }
 
-    public Project(int id, String title, List<Task> tasks) {
+    public Project(int id, String title) {
         this.id = id;
         this.title = title;
-        this.tasks = tasks;
+    }
+
+    public Project() {
+
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", title='" + title;
     }
 }
