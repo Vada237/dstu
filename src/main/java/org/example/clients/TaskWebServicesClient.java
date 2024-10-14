@@ -2,6 +2,7 @@ package org.example.clients;
 
 import org.example.models.Task;
 import org.example.services.task.TaskWebService;
+import org.example.services.task.TaskWebServiceImpl;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
@@ -26,7 +27,7 @@ public class TaskWebServicesClient {
 
         System.out.println();
         System.out.println("Получение задачи по id");
-        System.out.println(taskService.getById(2));
+        System.out.println(taskService.getById(1));
 
         System.out.println();
         System.out.println("Получение задач у пользователя");

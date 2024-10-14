@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 public class Task {
     private int id;
     private String title;
-    private LocalDateTimeWrapper startTime;
-    private LocalDateTimeWrapper finishTime;
+    private String startTime;
+    private String finishTime;
     private String status;
     private User user;
     private Project project;
@@ -28,6 +28,22 @@ public class Task {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getFinishTime() {
+        return finishTime;
+    }
+
+    public void setFinishTime(String finishTime) {
+        this.finishTime = finishTime;
     }
 
     public String getTitle() {
@@ -57,8 +73,8 @@ public class Task {
     public Task(
             int id,
             String title,
-            LocalDateTimeWrapper startTime,
-            LocalDateTimeWrapper finishTime,
+            String startTime,
+            String finishTime,
             String status,
             User user,
             Project project
@@ -73,8 +89,6 @@ public class Task {
     }
 
     public Task() {
-        this.startTime = new LocalDateTimeWrapper();
-        this.finishTime = new LocalDateTimeWrapper();
     }
 
     @Override
