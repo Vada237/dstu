@@ -1,6 +1,7 @@
 package org.example.models;
 
-public class User {
+public class User extends Model {
+    public static String tableName = "users";
     private int Id;
     private String firstName;
     private String secondName;

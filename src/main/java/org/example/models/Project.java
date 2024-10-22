@@ -2,7 +2,8 @@ package org.example.models;
 
 import java.util.List;
 
-public class Project {
+public class Project extends Model{
+    public static String tableName = "tasks";
     private int id;
     private String title;
     private List<Task> tasks;

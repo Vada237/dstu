@@ -5,7 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDateTime;
 
-public class Task {
+public class Task extends Model{
+    public static String tableName = "tasks";
     private int id;
     private String title;
     private String startTime;
