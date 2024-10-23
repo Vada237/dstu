@@ -4,6 +4,7 @@ import javax.xml.ws.Endpoint;
 
 import org.example.managers.MigrationManager;
 import org.example.managers.PostgresManager;
+import org.example.seeders.UserSeeder;
 import org.example.services.task.TaskWebServiceImpl;
 import org.example.services.user.UserWebServiceImpl;
 
@@ -20,6 +21,7 @@ public class Main {
             migrationManager.runMigrations();
         }
 
+        UserSeeder.run();
 //        Endpoint.publish(getUrl(8002, "user"), new UserWebServiceImpl());
 //        Endpoint.publish(getUrl(8003, "task"), new TaskWebServiceImpl());
 //        System.out.println("Server started");
