@@ -1,6 +1,7 @@
 package org.example.models;
 
-public class User {
+public class User extends Model {
+    public static String tableName = "users";
     private int Id;
     private String firstName;
     private String secondName;
@@ -32,8 +33,7 @@ public class User {
     public User() {
 
     }
-    public User(int id, String firstName, String secondName) {
-        Id = id;
+    public User(String firstName, String secondName) {
         this.firstName = firstName;
         this.secondName = secondName;
     }
