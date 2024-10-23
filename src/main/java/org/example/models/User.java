@@ -33,8 +33,7 @@ public class User extends Model {
     public User() {
 
     }
-    public User(int id, String firstName, String secondName) {
-        Id = id;
+    public User(String firstName, String secondName) {
         this.firstName = firstName;
         this.secondName = secondName;
     }

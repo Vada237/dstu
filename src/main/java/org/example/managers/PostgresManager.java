@@ -24,4 +24,16 @@ public class PostgresManager {
         PreparedStatement statement = conn.prepareStatement(query);
         statement.executeUpdate();
     }
+
+    public static void executeUpdate(String query, Object[] params) throws SQLException {
+        PreparedStatement statement = conn.prepareStatement(query);
+        setParams(params, statement);
+        statement.executeUpdate();
+    }
+
+    private static void setParams(Object[] params, PreparedStatement statement) throws SQLException {
+        for (int i = 1; i < params.length + 1; i++) {
+            statement.setObject(i, params[i-1]);
+        }
+    }
 }

@@ -3,7 +3,7 @@ package org.example.models;
 import java.util.List;
 
 public class Project extends Model{
-    public static String tableName = "tasks";
+    public static String tableName = "projects";
     private int id;
     private String title;
     private List<Task> tasks;
