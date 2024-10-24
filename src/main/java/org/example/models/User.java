@@ -1,5 +1,8 @@
 package org.example.models;
 
+import java.sql.SQLException;
+import java.util.Map;
+
 public class User extends Model {
     public static String tableName = "users";
     private int Id;
@@ -45,5 +48,9 @@ public class User extends Model {
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
                 '}';
+    }
+
+    public static void insert(Map<String, Object> params) throws SQLException {
+        Model.insert(params, tableName);
     }
 }

@@ -1,7 +1,9 @@
 package org.example.models;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Map;
 
 public class UserTask extends Model{
     public static String tableName = "user_tasks";
@@ -47,5 +49,9 @@ public class UserTask extends Model{
         this.userId = userId;
         this.taskId = taskId;
         this.trackedTime = trackedTime;
+    }
+
+    public static void insert(Map<String, Object> params) throws SQLException {
+        Model.insert(params, tableName);
     }
 }

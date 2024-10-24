@@ -9,7 +9,7 @@ import java.util.Map;
 public abstract class Model {
     public static String tableName = "";
 
-    public static void insert(Map<String, Object> params) throws SQLException {
+    public static void insert(Map<String, Object> params, String tableName) throws SQLException {
         String fields = String.join(", ", params.keySet());
         String[] paramKeys = new String[params.size()];
 
@@ -18,7 +18,7 @@ public abstract class Model {
         }
 
         String paramQueryPart = String.join(", ", paramKeys);
-        String query = "INSERT INTO " + tableName + fields + " VALUES " + "(" + paramQueryPart + ")";
+        String query = "INSERT INTO " + tableName + " (" + fields + ") VALUES " + "(" + paramQueryPart + ")";
         PostgresManager.executeUpdate(query, params.values().toArray());
     }
 }
