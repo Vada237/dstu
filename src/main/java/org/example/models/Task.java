@@ -3,7 +3,9 @@ package org.example.models;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 public class Task extends Model{
     public static String tableName = "tasks";
@@ -103,6 +105,10 @@ public class Task extends Model{
                 ", user=" + user +
                 ", project=" + project +
                 '}';
+    }
+
+    public static void insert(Map<String, Object> params) throws SQLException {
+        Model.insert(params, tableName);
     }
 }
 
