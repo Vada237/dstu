@@ -14,11 +14,12 @@ public class CreateUserTaskMigration implements IMigration {
         PostgresManager.executeUpdate(
                 "CREATE TABLE IF NOT EXISTS " + UserTask.tableName +
                         " (" +
+                        "id serial primary key, " +
                         "task_id INT REFERENCES " + Task.tableName + "(id), " +
                         "user_id INT REFERENCES " + User.tableName + "(id), " +
                         "tracked_time INT, " +
-                        "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
-                        "updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
+                        "created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP, " +
+                        "updated_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP" +
                         ")"
         );
     }

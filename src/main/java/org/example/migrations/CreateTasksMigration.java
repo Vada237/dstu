@@ -13,8 +13,9 @@ public class CreateTasksMigration implements IMigration {
         PostgresManager.executeUpdate("CREATE TABLE IF NOT EXISTS " + Task.tableName +
                 "(" +
                 "id serial primary key, " +
-                "start_time timestamp, " +
-                "end_time timestamp, " +
+                "title varchar, " +
+                "start_time timestamp(0), " +
+                "end_time timestamp(0), " +
                 "status varchar," +
                 "project_id int references " + Project.tableName + "(id)" +
                 ")");
