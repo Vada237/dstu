@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @WebService(endpointInterface = "org.example.services.task.TaskWebService")
 public class TaskWebServiceImpl implements TaskWebService {
-    public TaskRepository taskRepository = new TaskRepository(new UserRepository(), new ProjectRepository());
+    public TaskRepository taskRepository = new TaskRepository();
 
     @Override
     public Task getById(int id) {
