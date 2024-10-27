@@ -1,9 +1,6 @@
 package org.example.managers;
 
-import org.example.migrations.CreateProjectMigration;
-import org.example.migrations.CreateTasksMigration;
-import org.example.migrations.CreateUserMigration;
-import org.example.migrations.CreateUserTaskMigration;
+import org.example.migrations.*;
 
 import java.sql.SQLException;
 
@@ -20,9 +17,15 @@ public class MigrationManager {
 
         CreateUserTaskMigration createUserTaskMigration = new CreateUserTaskMigration();
         createUserTaskMigration.up();
+
+        AddCurrentUserFieldInTaskTableMigration addCurrentUserFieldInTaskTableMigration = new AddCurrentUserFieldInTaskTableMigration();
+        addCurrentUserFieldInTaskTableMigration.up();
     }
 
     public void dropMigrations() throws SQLException {
+        AddCurrentUserFieldInTaskTableMigration addCurrentUserFieldInTaskTableMigration = new AddCurrentUserFieldInTaskTableMigration();
+        addCurrentUserFieldInTaskTableMigration.down();
+
         CreateUserTaskMigration createUserTaskMigration = new CreateUserTaskMigration();
         createUserTaskMigration.down();
 
