@@ -3,11 +3,14 @@ package org.example.models;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-public class Task extends Model{
+public class Task extends Model {
     public static String tableName = "tasks";
     private int id;
     private String title;
@@ -72,7 +75,7 @@ public class Task extends Model{
     public void setUser(User user) {
         this.user = user;
     }
-    
+
     public Task(
             int id,
             String title,
@@ -109,6 +112,39 @@ public class Task extends Model{
 
     public static void insert(Map<String, Object> params) throws SQLException {
         Model.insert(params, tableName);
+    }
+
+    public static List<Task> all() throws SQLException {
+        return getCollection(Model.all(tableName));
+    }
+
+    public static void delete(int id) throws SQLException {
+        Model.delete(id, tableName);
+    }
+
+    public static Task getById(int id) throws SQLException {
+        return getCollection(Model.getById(id, tableName)).getFirst();
+    }
+
+    public static List<Task> getCollection(ResultSet data) throws SQLException {
+        List<Task> tasks = new ArrayList<Task>();
+
+        while (data.next()) {
+            Project project = Project.getById(data.getInt("project_id"));
+            User currentUser = User.getById(data.getInt("current_user_id"));
+
+            tasks.add(new Task(
+                    data.getInt("id"),
+                    data.getString("title"),
+                    data.getString("start_time"),
+                    data.getString("end_time"),
+                    data.getString("status"),
+                    currentUser,
+                    project
+            ));
+        }
+
+        return tasks;
     }
 }
 

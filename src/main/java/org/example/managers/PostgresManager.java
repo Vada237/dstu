@@ -20,6 +20,12 @@ public class PostgresManager {
         return statement.executeQuery();
     }
 
+    public static ResultSet executeSelect(String query, Object[] params) throws SQLException {
+        PreparedStatement statement = conn.prepareStatement(query);
+        setParams(params, statement);
+        return statement.executeQuery();
+    }
+
     public static void executeUpdate(String query) throws SQLException {
         PreparedStatement statement = conn.prepareStatement(query);
         statement.executeUpdate();
