@@ -2,12 +2,8 @@ package org.example.models;
 
 import org.example.managers.PostgresManager;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +19,7 @@ public class Task extends Model {
     private int userId;
     private Project project;
     private int projectId;
+
     public Project getProject() {
         return project;
     }
@@ -96,7 +93,6 @@ public class Task extends Model {
     }
 
     public Task(
-            int id,
             String title,
             String startTime,
             String finishTime,
@@ -104,13 +100,14 @@ public class Task extends Model {
             User user,
             Project project
     ) {
-        this.id = id;
         this.title = title;
         this.startTime = startTime;
         this.finishTime = finishTime;
         this.status = status;
         this.user = user;
+        this.userId = user.getId();
         this.project = project;
+        this.projectId = project.getId();
     }
 
     public Task() {
@@ -137,12 +134,17 @@ public class Task extends Model {
         return getCollection(Model.all(tableName));
     }
 
-    public static void delete(int id) throws SQLException {
-        Model.delete(id, tableName);
+    public static void deleteById(int id) throws SQLException {
+        Model.deleteById(id, tableName);
     }
 
     public static Task getById(int id) throws SQLException {
-        return getCollection(Model.getById(id, tableName)).get(0);
+        List<Task> tasks = getCollection(Model.getById(id, tableName));
+        if (tasks.isEmpty()) {
+            return null;
+        }
+
+        return tasks.get(0);
     }
 
     public static List<Task> getByUserId(int userId) throws SQLException {
@@ -166,18 +168,22 @@ public class Task extends Model {
             Project project = Project.getById(data.getInt("project_id"));
             User currentUser = User.getById(data.getInt("current_user_id"));
 
-            tasks.add(new Task(
-                    data.getInt("id"),
+            Task task = new Task(
                     data.getString("title"),
                     data.getString("start_time"),
                     data.getString("end_time"),
                     data.getString("status"),
                     currentUser,
-                    project
-            ));
+                    project);
+            task.setId(data.getInt("id"));
+            tasks.add(task);
         }
 
         return tasks;
+    }
+
+    public static List<Task> getByTitle(String title) throws SQLException {
+        return getCollection(PostgresManager.executeSelect("SELECT * FROM " + tableName + " WHERE title ilike '%" + title + "%'"));
     }
 }
 

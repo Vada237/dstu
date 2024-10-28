@@ -1,5 +1,6 @@
 package org.example.clients;
 
+import org.example.models.User;
 import org.example.services.user.UserWebService;
 
 import java.net.URL;
@@ -14,6 +15,15 @@ public class UserWebServiceClient {
         QName qname = new QName("http://user.services.example.org/", "UserWebServiceImplService");
         Service service = Service.create(url, qname);
         UserWebService userService = service.getPort(UserWebService.class);
-        System.out.println(userService.getUserById(2));
+
+        System.out.println("Создание пользователя");
+        userService.createUser(new User("Lenis", "De"));
+
+        System.out.println("\nПолучение созданного пользователя");
+        User user = userService.getByFirstAndSecondName("Lenis", "De")[0];
+        System.out.println(user);
+
+        System.out.println("\nУдаление созданного пользователя");
+        userService.deleteUserById(user.getId());
     }
 }

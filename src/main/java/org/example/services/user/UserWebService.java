@@ -12,4 +12,10 @@ import java.sql.SQLException;
 public interface UserWebService {
     @WebMethod
     public User getUserById(int id) throws SQLException;
+    @WebMethod
+    public void createUser(User user) throws SQLException;
+    @WebMethod
+    public void deleteUserById(int id) throws SQLException;
+    @WebMethod
+    public User[] getByFirstAndSecondName(String firstName, String secondName) throws SQLException;
 }

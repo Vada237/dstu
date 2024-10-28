@@ -1,7 +1,5 @@
 package org.example.models;
 
-import org.example.managers.PostgresManager;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -68,7 +66,7 @@ public class UserTask extends Model{
     }
 
     public static void delete(int id) throws SQLException {
-        Model.delete(id, tableName);
+        Model.deleteById(id, tableName);
     }
 
     private static List<UserTask> getCollection(ResultSet data) throws SQLException {

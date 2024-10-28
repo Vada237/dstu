@@ -65,7 +65,7 @@ public class Project extends Model{
     }
 
     public static void delete(int id) throws SQLException {
-        Model.delete(id, tableName);
+        Model.deleteById(id, tableName);
     }
 
     private static List<Project> getCollection(ResultSet data) throws SQLException {

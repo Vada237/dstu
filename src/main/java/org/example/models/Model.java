@@ -31,7 +31,7 @@ public abstract class Model {
         return PostgresManager.executeSelect("SELECT * FROM " + tableName + " WHERE id = ?", Model.getParamId(id));
     }
 
-    public static void delete(int id, String tableName) throws SQLException {
+    public static void deleteById(int id, String tableName) throws SQLException {
         PostgresManager.executeUpdate("DELETE FROM " + tableName + " WHERE id = ?", Model.getParamId(id));
     };
 

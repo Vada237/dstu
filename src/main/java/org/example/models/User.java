@@ -1,5 +1,7 @@
 package org.example.models;
 
+import org.example.managers.PostgresManager;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -39,8 +41,8 @@ public class User extends Model {
     public User() {
 
     }
-    public User(int id, String firstName, String secondName) {
-        this.Id = id;
+
+    public User(String firstName, String secondName) {
         this.firstName = firstName;
         this.secondName = secondName;
     }
@@ -66,20 +68,27 @@ public class User extends Model {
         return getCollection(Model.getById(id, tableName)).get(0);
     }
 
-    public static void delete(int id) throws SQLException {
-        Model.delete(id, tableName);
+    public static void deleteById(int id) throws SQLException {
+        Model.deleteById(id, tableName);
+    }
+
+    public static List<User> getByFirstAndSecondName(String firstName, String secondName) throws SQLException {
+        Object[] params = new Object[2];
+        params[0] = firstName;
+        params[1] = secondName;
+
+        return getCollection(PostgresManager.executeSelect(
+                "SELECT * FROM " + tableName + " WHERE first_name = ? AND second_name = ?", params)
+        );
     }
 
     private static List<User> getCollection(ResultSet data) throws SQLException {
         ArrayList<User> users = new ArrayList<>();
 
         while (data.next()) {
-            users.add(new User(
-                    data.getInt("id"),
-                    data.getString("first_name"),
-                    data.getString("second_name")
-                    )
-            );
+            User user = new User(data.getString("first_name"), data.getString("second_name"));
+            user.setId(data.getInt("id"));
+            users.add(user);
         }
 
         return users;
