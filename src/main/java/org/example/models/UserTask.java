@@ -64,25 +64,11 @@ public class UserTask extends Model{
     }
 
     public static UserTask getById(int id) throws SQLException {
-        return getCollection(Model.getById(id, tableName)).getFirst();
+        return getCollection(Model.getById(id, tableName)).get(0);
     }
 
     public static void delete(int id) throws SQLException {
         Model.delete(id, tableName);
-    }
-
-    public static List<UserTask> getByUserId(int userId) throws SQLException {
-        Object[] params = new Object[1];
-        params[0] = userId;
-
-        return getCollection(PostgresManager.executeSelect("SELECT * FROM " + tableName + "WHERE user_id = ?", params));
-    }
-
-    public static List<UserTask> getByProjectId(int projectId) throws SQLException {
-        Object[] params = new Object[1];
-        params[0] = projectId;
-
-        return getCollection(PostgresManager.executeSelect("SELECT * FROM " + tableName + "WHERE project_id = ?", params));
     }
 
     private static List<UserTask> getCollection(ResultSet data) throws SQLException {

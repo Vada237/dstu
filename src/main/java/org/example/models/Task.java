@@ -1,5 +1,7 @@
 package org.example.models;
 
+import org.example.managers.PostgresManager;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,8 +20,9 @@ public class Task extends Model {
     private String finishTime;
     private String status;
     private User user;
+    private int userId;
     private Project project;
-
+    private int projectId;
     public Project getProject() {
         return project;
     }
@@ -76,6 +79,22 @@ public class Task extends Model {
         this.user = user;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
     public Task(
             int id,
             String title,
@@ -123,7 +142,21 @@ public class Task extends Model {
     }
 
     public static Task getById(int id) throws SQLException {
-        return getCollection(Model.getById(id, tableName)).getFirst();
+        return getCollection(Model.getById(id, tableName)).get(0);
+    }
+
+    public static List<Task> getByUserId(int userId) throws SQLException {
+        Object[] params = new Object[1];
+        params[0] = userId;
+
+        return getCollection(PostgresManager.executeSelect("SELECT * FROM " + tableName + " WHERE current_user_id = ?", params));
+    }
+
+    public static List<Task> getByProjectId(int projectId) throws SQLException {
+        Object[] params = new Object[1];
+        params[0] = projectId;
+
+        return getCollection(PostgresManager.executeSelect("SELECT * FROM " + tableName + " WHERE project_id = ?", params));
     }
 
     public static List<Task> getCollection(ResultSet data) throws SQLException {

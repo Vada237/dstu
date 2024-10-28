@@ -8,10 +8,11 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Arrays;
 
 public class TaskWebServicesClient {
-    public static void main(String[] args) throws MalformedURLException {
+    public static void main(String[] args) throws MalformedURLException, SQLException {
         URL url = new URL("http://localhost:8003/wss/task?wsdl");
         QName qname = new QName("http://task.services.example.org/", "TaskWebServiceImplService");
 

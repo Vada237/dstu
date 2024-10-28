@@ -39,7 +39,8 @@ public class User extends Model {
     public User() {
 
     }
-    public User(String firstName, String secondName) {
+    public User(int id, String firstName, String secondName) {
+        this.Id = id;
         this.firstName = firstName;
         this.secondName = secondName;
     }
@@ -62,7 +63,7 @@ public class User extends Model {
     }
 
     public static User getById(int id) throws SQLException {
-        return getCollection(Model.getById(id, tableName)).getFirst();
+        return getCollection(Model.getById(id, tableName)).get(0);
     }
 
     public static void delete(int id) throws SQLException {
@@ -73,7 +74,12 @@ public class User extends Model {
         ArrayList<User> users = new ArrayList<>();
 
         while (data.next()) {
-            users.add(new User(data.getString("first_name"), data.getString("second_name")));
+            users.add(new User(
+                    data.getInt("id"),
+                    data.getString("first_name"),
+                    data.getString("second_name")
+                    )
+            );
         }
 
         return users;

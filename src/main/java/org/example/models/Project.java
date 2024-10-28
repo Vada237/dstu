@@ -57,7 +57,7 @@ public class Project extends Model{
     }
 
     public static Project getById(int id) throws SQLException {
-        return getCollection(Model.getById(id, tableName)).getFirst();
+        return getCollection(Model.getById(id, tableName)).get(0);
     }
 
     public static List<Project> all() throws SQLException {
