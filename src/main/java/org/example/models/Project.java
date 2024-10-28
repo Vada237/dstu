@@ -1,6 +1,8 @@
 package org.example.models;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -52,5 +54,27 @@ public class Project extends Model{
 
     public static void insert(Map<String, Object> params) throws SQLException {
         Model.insert(params, tableName);
+    }
+
+    public static Project getById(int id) throws SQLException {
+        return getCollection(Model.getById(id, tableName)).get(0);
+    }
+
+    public static List<Project> all() throws SQLException {
+        return getCollection(Model.all(tableName));
+    }
+
+    public static void delete(int id) throws SQLException {
+        Model.deleteById(id, tableName);
+    }
+
+    private static List<Project> getCollection(ResultSet data) throws SQLException {
+        ArrayList<Project> projects = new ArrayList<>();
+
+        while (data.next()) {
+            projects.add(new Project(data.getInt("id"), data.getString("title")));
+        }
+
+        return projects;
     }
 }
