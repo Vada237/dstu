@@ -18,6 +18,7 @@ public class UserTask extends Model{
     private int trackedTime;
     private Date createdAt;
     private Date updatedAt;
+    private int totalProgress = 0;
 
     public int getId() {
         return id;
@@ -47,10 +48,19 @@ public class UserTask extends Model{
         this.trackedTime = trackedTime;
     }
 
-    public UserTask(int userId, int taskId, int trackedTime) {
+    public int getTotalProgress() {
+        return this.totalProgress;
+    }
+
+    public void setTotalProgress(int totalProgress) {
+        this.totalProgress = totalProgress;
+    }
+
+    public UserTask(int userId, int taskId, int trackedTime, int totalProgress) {
         this.userId = userId;
         this.taskId = taskId;
         this.trackedTime = trackedTime;
+        this.totalProgress = totalProgress;
     }
 
     public static void insert(Map<String, Object> params) throws SQLException {
@@ -76,7 +86,8 @@ public class UserTask extends Model{
             userTasks.add(new UserTask(
                     data.getInt("user_id"),
                     data.getInt("task_id"),
-                    data.getInt("tracked_time")
+                    data.getInt("tracked_time"),
+                    data.getInt("total_progress")
             ));
         }
 

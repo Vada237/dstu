@@ -19,6 +19,7 @@ public class Task extends Model {
     private int userId;
     private Project project;
     private int projectId;
+    private int totalProgress;
 
     public Project getProject() {
         return project;
@@ -92,6 +93,14 @@ public class Task extends Model {
         this.projectId = projectId;
     }
 
+    public int getTotalProgress() {
+        return this.totalProgress;
+    }
+
+    public void setTotalProgress(int totalProgress) {
+        this.totalProgress = totalProgress;
+    }
+
     public Task(
             String title,
             String startTime,
@@ -107,7 +116,8 @@ public class Task extends Model {
         this.user = user;
         this.userId = user.getId();
         this.project = project;
-        this.projectId = project.getId();
+        this.projectId = project.getId();        
+        this.totalProgress = 0;
     }
 
     public Task() {
