@@ -20,9 +20,15 @@ public class MigrationManager {
 
         AddCurrentUserFieldInTaskTableMigration addCurrentUserFieldInTaskTableMigration = new AddCurrentUserFieldInTaskTableMigration();
         addCurrentUserFieldInTaskTableMigration.up();
+
+        AddTotalProgressFieldInTasksTableMigration addTotalProgressFieldInTasksTableMigration = new AddTotalProgressFieldInTasksTableMigration();
+        addTotalProgressFieldInTasksTableMigration.up();        
     }
 
     public void dropMigrations() throws SQLException {
+        AddTotalProgressFieldInTasksTableMigration addTotalProgressFieldInTasksTableMigration = new AddTotalProgressFieldInTasksTableMigration();
+        addTotalProgressFieldInTasksTableMigration.down();     
+
         AddCurrentUserFieldInTaskTableMigration addCurrentUserFieldInTaskTableMigration = new AddCurrentUserFieldInTaskTableMigration();
         addCurrentUserFieldInTaskTableMigration.down();
 
