@@ -99,6 +99,10 @@ public class Task extends Model {
 
     public void setTotalProgress(int totalProgress) {
         this.totalProgress = totalProgress;
+
+        if (this.totalProgress > 100) {
+            this.totalProgress = 100;
+        }
     }
 
     public Task(
@@ -134,6 +138,7 @@ public class Task extends Model {
                 ", status='" + status + '\'' +
                 ", user=" + user +
                 ", project=" + project +
+                ", total_progress=" + totalProgress +
                 '}';
     }
 
@@ -197,14 +202,23 @@ public class Task extends Model {
 
     public static void UpdateProgress(Task task, int progress) throws SQLException {
         Object[] params = new Object[2];
-        params[0] = task.getTotalProgress() + progress;
+        task.setTotalProgress(task.getTotalProgress() + progress);
+        
+        params[0] = task.getTotalProgress();
         params[1] = task.getId();
 
         PostgresManager.executeUpdate("UPDATE " + tableName + " SET total_progress = ? WHERE id = ?", params);
     }
-    
+
     public static List<Task> getByTitle(String title) throws SQLException {
         return getCollection(PostgresManager.executeSelect("SELECT * FROM " + tableName + " WHERE title ilike '%" + title + "%'"));
+    }
+
+    public static void updateStatus(int taskId, String status) throws SQLException {
+        Object[] params = new Object[2];
+        params[0] = status;
+        params[1] = taskId;
+        PostgresManager.executeUpdate("UPDATE " + tableName + " SET status = ? WHERE id = ?", params);
     }
 }
 
