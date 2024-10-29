@@ -18,7 +18,7 @@ public class UserTask extends Model{
     private int trackedTime;
     private Date createdAt;
     private Date updatedAt;
-    private int totalProgress = 0;
+    private int totalProgress;
 
     public int getId() {
         return id;
