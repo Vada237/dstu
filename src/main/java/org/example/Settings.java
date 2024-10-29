@@ -11,4 +11,5 @@ public class Settings {
     public static final String DB_NAME = dotenv.get("DB_NAME");
     public static final String URL = "jdbc:" + DRIVER + "://" + HOST + ":" + PORT + "/" + DB_NAME;
     public static final boolean ENABLE_MIGRATIONS = Boolean.parseBoolean(dotenv.get("ENABLE_MIGRATIONS"));
+    public static final int MAX_COUNT_THREAD = 5;
 }

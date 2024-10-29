@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.example.managers.PostgresManager;
+
 public class UserTask extends Model{
     public static String tableName = "user_tasks";
 
@@ -18,7 +20,7 @@ public class UserTask extends Model{
     private int trackedTime;
     private Date createdAt;
     private Date updatedAt;
-    private int totalProgress = 0;
+    private int totalProgress;
 
     public int getId() {
         return id;
@@ -79,6 +81,12 @@ public class UserTask extends Model{
         Model.deleteById(id, tableName);
     }
 
+    public static List<UserTask> getByTaskId(int taskId) throws SQLException {
+        Object[] params = new Object[1];
+        params[0] = taskId;
+
+        return getCollection(PostgresManager.executeSelect("SELECT * FROM " + tableName + " WHERE task_id = ?", params));
+    }
     private static List<UserTask> getCollection(ResultSet data) throws SQLException {
         List<UserTask> userTasks = new ArrayList<>();
 

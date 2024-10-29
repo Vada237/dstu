@@ -52,7 +52,8 @@ public class TaskWebServicesClient {
                 LocalDateTime.of(2024, Month.NOVEMBER, 2, 12, 0, 0).toString(),
                 TaskStatus.OPEN.name(),
                 User.getById(3),
-                Project.getById(1)
+                Project.getById(1),
+                30
         ));
 
         System.out.println("Получение созданной задачи по названию");
