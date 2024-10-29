@@ -16,7 +16,8 @@ public class TaskSeeder {
                 Map.entry("end_time", LocalDateTime.of(2024, Month.OCTOBER, 19, 10, 0, 0)),
                 Map.entry("status", TaskStatus.CLOSE.name()),
                 Map.entry("project_id", 1),
-                Map.entry("current_user_id", 1)
+                Map.entry("current_user_id", 1),
+                Map.entry("total_progress", 50)
                 )
         );
 
@@ -26,7 +27,8 @@ public class TaskSeeder {
                         Map.entry("end_time", LocalDateTime.of(2024, Month.OCTOBER, 19, 10, 0, 0)),
                         Map.entry("status", TaskStatus.OPEN.name()),
                         Map.entry("project_id", 1),
-                        Map.entry("current_user_id", 1)
+                        Map.entry("current_user_id", 1),
+                        Map.entry("total_progress", 40)
                 )
         );
 
@@ -36,7 +38,8 @@ public class TaskSeeder {
                         Map.entry("end_time", LocalDateTime.of(2024, Month.NOVEMBER, 29, 15, 30, 0)),
                         Map.entry("status", TaskStatus.OPEN.name()),
                         Map.entry("project_id", 2),
-                        Map.entry("current_user_id", 4)
+                        Map.entry("current_user_id", 4),
+                        Map.entry("total_progress", 10)
                 )
         );
 
@@ -46,7 +49,8 @@ public class TaskSeeder {
                         Map.entry("end_time", LocalDateTime.of(2024, Month.APRIL, 3, 11, 30, 0)),
                         Map.entry("status", TaskStatus.COMPLETED.name()),
                         Map.entry("project_id", 3),
-                        Map.entry("current_user_id", 3)
+                        Map.entry("current_user_id", 3),
+                        Map.entry("total_progress", 0)
                 )
         );
 
@@ -56,7 +60,8 @@ public class TaskSeeder {
                         Map.entry("end_time", LocalDateTime.of(2024, Month.JUNE, 3, 11, 30, 0)),
                         Map.entry("status", TaskStatus.COMPLETED.name()),
                         Map.entry("project_id", 4),
-                        Map.entry("current_user_id", 2)
+                        Map.entry("current_user_id", 2),
+                        Map.entry("total_progress", 0)
                 )
         );
 
@@ -66,7 +71,8 @@ public class TaskSeeder {
                         Map.entry("end_time", LocalDateTime.of(2024, Month.JUNE, 3, 11, 30, 0)),
                         Map.entry("status", TaskStatus.COMPLETED.name()),
                         Map.entry("project_id", 4),
-                        Map.entry("current_user_id", 2)
+                        Map.entry("current_user_id", 2),
+                        Map.entry("total_progress", 0)
                 )
         );
     }
