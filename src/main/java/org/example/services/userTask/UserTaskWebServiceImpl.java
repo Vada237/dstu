@@ -8,7 +8,6 @@ import org.example.models.Task;
 import org.example.models.UserTask;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
 import java.util.concurrent.CompletableFuture;
 import javax.jws.WebService;
 import java.util.concurrent.ExecutorService;
@@ -23,7 +22,7 @@ import java.sql.Connection;
 
 @WebService(endpointInterface = "org.example.services.userTask.UserTaskWebService")
 public class UserTaskWebServiceImpl implements UserTaskWebService{
-    private ExecutorService executor = Executors.newFixedThreadPool(Settings.MAX_COUNT_THREAD);
+    private final ExecutorService executor = Executors.newFixedThreadPool(Settings.MAX_COUNT_THREAD);
 
     @Override
     public void trackTime(Task task, int time, int progress) throws SQLException {
@@ -79,12 +78,11 @@ public class UserTaskWebServiceImpl implements UserTaskWebService{
         }
     }
 
-    private Future<Void> addProgress(Task task, int progress) throws SQLException, InterruptedException {
+    private void addProgress(Task task, int progress) throws SQLException, InterruptedException {
         Task.UpdateProgress(task, progress);
-        return null;
     }
 
-    private Future<Void> addPivotProgress(Task task, int time, int progress) throws SQLException {
+    private void addPivotProgress(Task task, int time, int progress) throws SQLException {
         UserTask.insert(Map.ofEntries(
             Map.entry("user_id", task.getUserId()),
             Map.entry("task_id", task.getId()),
@@ -93,7 +91,6 @@ public class UserTaskWebServiceImpl implements UserTaskWebService{
         ));
 
 
-        return null;
     }
 
     private <T> CompletableFuture<Void> runAsyncTask(Callable<T> task, Executor executor) {
