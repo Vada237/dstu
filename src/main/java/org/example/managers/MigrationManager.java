@@ -22,10 +22,16 @@ public class MigrationManager {
         addCurrentUserFieldInTaskTableMigration.up();
 
         AddTotalProgressFieldInTasksTableMigration addTotalProgressFieldInTasksTableMigration = new AddTotalProgressFieldInTasksTableMigration();
-        addTotalProgressFieldInTasksTableMigration.up();        
+        addTotalProgressFieldInTasksTableMigration.up();
+
+        AddStartAndEndTimeInProjectTableMigration addStartAndEndTimeInProjectTableMigration = new AddStartAndEndTimeInProjectTableMigration();
+        addStartAndEndTimeInProjectTableMigration.up();
     }
 
     public void dropMigrations() throws SQLException {
+        AddStartAndEndTimeInProjectTableMigration addStartAndEndTimeInProjectTableMigration = new AddStartAndEndTimeInProjectTableMigration();
+        addStartAndEndTimeInProjectTableMigration.down();
+
         AddTotalProgressFieldInTasksTableMigration addTotalProgressFieldInTasksTableMigration = new AddTotalProgressFieldInTasksTableMigration();
         addTotalProgressFieldInTasksTableMigration.down();     
 
