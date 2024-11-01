@@ -21,31 +21,34 @@ import java.util.concurrent.Executor;
 import java.sql.Connection;
 
 @WebService(endpointInterface = "org.example.services.userTask.UserTaskWebService")
-public class UserTaskWebServiceImpl implements UserTaskWebService{
+public class UserTaskWebServiceImpl implements UserTaskWebService {
     private final ExecutorService executor = Executors.newFixedThreadPool(Settings.MAX_COUNT_THREAD);
 
     @Override
-    public void trackTime(Task task,int userId, int time, int progress) throws SQLException {
+    public void trackTime(Task task, int userId, int time, int progress, String createdAt) throws SQLException {
         Connection connection = PostgresManager.conn;
         connection.setAutoCommit(false);
 
         CompletableFuture<Void> addProgressFuture = runAsyncTask(() -> {
-             addProgress(task, progress); return null;
-            }, executor);
+            addProgress(task, progress);
+            return null;
+        }, executor);
 
         CompletableFuture<Void> addPivotProgressFuture = runAsyncTask(() -> {
-            addPivotProgress(task, userId, time, progress); return null;
+            addPivotProgress(task, userId, time, progress, createdAt);
+            return null;
         }, executor);
-        
+
         CompletableFuture<Void> setTotalProgressFuture = runAsyncTask(() -> {
-            task.setTotalProgress(task.getTotalProgress() + progress); return null;
+            task.setTotalProgress(task.getTotalProgress() + progress);
+            return null;
         }, executor);
-    
+
         CompletableFuture<Void> allFutures = CompletableFuture.allOf(addProgressFuture, addPivotProgressFuture, setTotalProgressFuture);
-        
+
         allFutures.thenRun(() -> {
             try {
-                checkProgress(task);                
+                checkProgress(task);
                 connection.commit();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -82,12 +85,13 @@ public class UserTaskWebServiceImpl implements UserTaskWebService{
         Task.UpdateProgress(task, progress);
     }
 
-    private void addPivotProgress(Task task,int userId, int time, int progress) throws SQLException {
+    private void addPivotProgress(Task task, int userId, int time, int progress, String createdAt) throws SQLException {
         UserTask.insert(Map.ofEntries(
-            Map.entry("user_id", userId),
-            Map.entry("task_id", task.getId()),
-            Map.entry("tracked_time", time),
-            Map.entry("total_progress", progress)
+                Map.entry("user_id", userId),
+                Map.entry("task_id", task.getId()),
+                Map.entry("tracked_time", time),
+                Map.entry("total_progress", progress),
+                Map.entry("created_at", LocalDateTime.parse(createdAt, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")))
         ));
 
 
