@@ -25,7 +25,7 @@ public class UserTaskWebServiceImpl implements UserTaskWebService{
     private final ExecutorService executor = Executors.newFixedThreadPool(Settings.MAX_COUNT_THREAD);
 
     @Override
-    public void trackTime(Task task, int time, int progress) throws SQLException {
+    public void trackTime(Task task,int userId, int time, int progress) throws SQLException {
         Connection connection = PostgresManager.conn;
         connection.setAutoCommit(false);
 
@@ -34,7 +34,7 @@ public class UserTaskWebServiceImpl implements UserTaskWebService{
             }, executor);
 
         CompletableFuture<Void> addPivotProgressFuture = runAsyncTask(() -> {
-            addPivotProgress(task, time, progress); return null;
+            addPivotProgress(task, userId, time, progress); return null;
         }, executor);
         
         CompletableFuture<Void> setTotalProgressFuture = runAsyncTask(() -> {
@@ -82,9 +82,9 @@ public class UserTaskWebServiceImpl implements UserTaskWebService{
         Task.UpdateProgress(task, progress);
     }
 
-    private void addPivotProgress(Task task, int time, int progress) throws SQLException {
+    private void addPivotProgress(Task task,int userId, int time, int progress) throws SQLException {
         UserTask.insert(Map.ofEntries(
-            Map.entry("user_id", task.getUserId()),
+            Map.entry("user_id", userId),
             Map.entry("task_id", task.getId()),
             Map.entry("tracked_time", time),
             Map.entry("total_progress", progress)
