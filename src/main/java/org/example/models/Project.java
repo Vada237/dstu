@@ -11,6 +11,8 @@ public class Project extends Model{
     private int id;
     private String title;
     private List<Task> tasks;
+    private String startTime;
+    private String finishTime;
 
     public int getId() {
         return id;
@@ -36,13 +38,31 @@ public class Project extends Model{
         this.tasks = tasks;
     }
 
-    public Project(int id, String title) {
+    public Project(int id, String title, String startTime, String finishTime) {
         this.id = id;
         this.title = title;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
     }
 
     public Project() {
 
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setFinishTime(String finishTime) {
+        this.finishTime = finishTime;
+    }
+
+    public String getStartTime() {
+        return this.startTime;
+    }
+
+    public String getFinishTime() {
+        return this.finishTime;
     }
 
     @Override
@@ -72,7 +92,12 @@ public class Project extends Model{
         ArrayList<Project> projects = new ArrayList<>();
 
         while (data.next()) {
-            projects.add(new Project(data.getInt("id"), data.getString("title")));
+            projects.add(new Project(
+                data.getInt("id"), 
+            data.getString("title"), 
+            data.getTimestamp("start_time").toString(), 
+            data.getTimestamp("end_time").toString())
+            );
         }
 
         return projects;

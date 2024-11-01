@@ -2,6 +2,7 @@ package org.example;
 
 import javax.xml.ws.Endpoint;
 
+import org.example.services.project.ProjectWebServiceImpl;
 import org.example.services.task.TaskWebServiceImpl;
 import org.example.services.user.UserWebServiceImpl;
 import org.example.services.userTask.UserTaskWebServiceImpl;
@@ -15,6 +16,7 @@ public class Main {
         Endpoint.publish(getUrl(8002, "user"), new UserWebServiceImpl());
         Endpoint.publish(getUrl(8003, "task"), new TaskWebServiceImpl());
         Endpoint.publish(getUrl(8004, "userTask"), new UserTaskWebServiceImpl());
+        Endpoint.publish(getUrl(8005, "project"), new ProjectWebServiceImpl());
         System.out.println("Server started");
     }
 
