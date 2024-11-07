@@ -15,34 +15,30 @@ public class UserTaskWebServicesClient {
         TaskWebServiceImpl taskService = new TaskWebServiceImpl();
 
         System.out.println("Заполнение задач для графика burndown");
-        runIteration(userTaskservice, taskService, 1, 2, 1800, 100, "2024-03-04T10:00:00");
-        runIteration(userTaskservice, taskService, 2, 2, 1800, 100, "2024-03-04T10:30:00");
-        runIteration(userTaskservice, taskService, 3, 4, Time.SECONDS_IN_DAYS, 80, "2024-03-04T12:00:00");
-        runIteration(userTaskservice, taskService, 3, 4, Time.SECONDS_IN_DAYS, 10, "2024-03-06T12:00:00");
-        runIteration(userTaskservice, taskService, 3, 4, Time.SECONDS_IN_DAYS, 10, "2024-03-07T12:00:00");
-        runIteration(userTaskservice, taskService, 4, 3, Time.SECONDS_IN_DAYS, 33, "2024-03-12T10:00:00");
-        runIteration(userTaskservice, taskService, 4, 3, Time.SECONDS_IN_DAYS, 17, "2024-03-13T10:00:00");
-        runIteration(userTaskservice, taskService, 4, 3, Time.SECONDS_IN_DAYS, 50, "2024-03-14T10:00:00");
+        runIteration(userTaskservice, taskService, 4, 4, Time.SECONDS_IN_HOURS * 2, 25, "2024-03-15T10:00:00");
+        runIteration(userTaskservice, taskService, 4, 4, Time.SECONDS_IN_HOURS * 3, 75, "2024-03-18T10:00:00");
 
-        runIteration(userTaskservice, taskService, 5, 4, Time.SECONDS_IN_DAYS, 15, "2024-03-08T10:00:00");
-        runIteration(userTaskservice, taskService, 5, 4, Time.SECONDS_IN_DAYS, 25, "2024-03-09T10:00:00");
-        runIteration(userTaskservice, taskService, 5, 4, Time.SECONDS_IN_DAYS, 5, "2024-03-10T10:00:00");
-        runIteration(userTaskservice, taskService, 5, 4, Time.SECONDS_IN_DAYS, 40, "2024-03-11T10:00:00");
-        runIteration(userTaskservice, taskService, 5, 4, Time.SECONDS_IN_DAYS, 15, "2024-03-12T10:00:00");
+        runIteration(userTaskservice, taskService, 3, 4, Time.SECONDS_IN_HOURS * 2, 20, "2024-03-11T10:00:00");
+        runIteration(userTaskservice, taskService, 3, 4, Time.SECONDS_IN_HOURS * 4, 60, "2024-03-12T10:00:00");
+        runIteration(userTaskservice, taskService, 3, 4, Time.SECONDS_IN_HOURS * 2, 20, "2024-03-12T18:00:00");
 
-        runIteration(userTaskservice, taskService, 6, 3, Time.SECONDS_IN_DAYS, 70, "2024-03-16T10:00:00");
-        runIteration(userTaskservice, taskService, 6, 3, Time.SECONDS_IN_DAYS, 30, "2024-03-17T10:00:00");
+        runIteration(userTaskservice, taskService, 1, 4, Time.SECONDS_IN_HOURS * 2, 10, "2024-03-04T14:00:00");
+        runIteration(userTaskservice, taskService, 1, 4, Time.SECONDS_IN_HOURS * 4, 40, "2024-03-05T14:00:00");
+        runIteration(userTaskservice, taskService, 1, 4, Time.SECONDS_IN_HOURS * 3, 35, "2024-03-06T14:00:00");
+        runIteration(userTaskservice, taskService, 1, 4, Time.SECONDS_IN_HOURS * 3, 15, "2024-03-07T10:00:00");
 
-        runIteration(userTaskservice, taskService, 7, 1, Time.SECONDS_IN_DAYS, 30, "2024-03-14T10:00:00");
-        runIteration(userTaskservice, taskService, 7, 1, Time.SECONDS_IN_DAYS, 40, "2024-03-15T10:00:00");
-        runIteration(userTaskservice, taskService, 7, 1, Time.SECONDS_IN_DAYS, 10, "2024-03-16T10:00:00");
-        runIteration(userTaskservice, taskService, 7, 1, Time.SECONDS_IN_DAYS, 20, "2024-03-17T10:00:00");
+        runIteration(userTaskservice, taskService, 1, 4, Time.SECONDS_IN_HOURS * 5, 100, "2024-03-15T12:00:00");
 
-        runIteration(userTaskservice, taskService, 8, 4, Time.SECONDS_IN_DAYS, 100, "2024-03-14T10:00:00");
-        runIteration(userTaskservice, taskService, 8, 4, Time.SECONDS_IN_DAYS, 100, "2024-03-15T10:00:00");
-        runIteration(userTaskservice, taskService, 8, 4, Time.SECONDS_IN_DAYS, 100, "2024-03-16T10:00:00");
+        runIteration(userTaskservice, taskService, 2, 3, Time.SECONDS_IN_HOURS * 2, 75, "2024-03-12T12:00:00");
+        runIteration(userTaskservice, taskService, 2, 3, Time.SECONDS_IN_HOURS, 25, "2024-03-13T15:00:00");
 
-        runIteration(userTaskservice, taskService, 9, 4, Time.SECONDS_IN_DAYS, 100, "2024-03-17T10:00:00");
+        runIteration(userTaskservice, taskService, 6, 3, Time.SECONDS_IN_HOURS * 3, 80, "2024-03-21T15:00:00");
+        runIteration(userTaskservice, taskService, 6, 3, Time.SECONDS_IN_HOURS, 20, "2024-03-21T15:00:00");
+
+        runIteration(userTaskservice, taskService, 7, 3, Time.SECONDS_IN_HOURS, 40, "2024-03-22T10:00:00");
+        runIteration(userTaskservice, taskService, 7, 3, Time.SECONDS_IN_HOURS * 3, 40, "2024-03-22T11:00:00");
+
+        runIteration(userTaskservice, taskService, 7, 3, Time.SECONDS_IN_HOURS * 3, 20, "2024-03-22T15:00:00");
     }
 
     private static void runIteration(
