@@ -1,53 +1,36 @@
 package org.example.managers;
 
 import org.example.migrations.*;
+import org.example.migrations.interfaces.IMigration;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MigrationManager {
+    private final List<IMigration> migrations;
+
+    public MigrationManager() {
+        this.migrations = new ArrayList<>();
+        this.migrations.add(new CreateUserMigration());
+        this.migrations.add(new CreateProjectMigration());
+        this.migrations.add(new CreateTasksMigration());
+        this.migrations.add(new CreateUserTaskMigration());
+        this.migrations.add(new AddCurrentUserFieldInTaskTableMigration());
+        this.migrations.add(new AddTotalProgressFieldInTasksTableMigration());
+        this.migrations.add(new AddStartAndEndTimeInProjectTableMigration());
+        this.migrations.add(new AddCountHoursFieldInProjectTableMigration());
+    }
+
     public void runMigrations() throws SQLException {
-        CreateUserMigration createUserMigration = new CreateUserMigration();
-        createUserMigration.up();
-
-        CreateProjectMigration createProjectMigration = new CreateProjectMigration();
-        createProjectMigration.up();
-
-        CreateTasksMigration createTasksMigration = new CreateTasksMigration();
-        createTasksMigration.up();
-
-        CreateUserTaskMigration createUserTaskMigration = new CreateUserTaskMigration();
-        createUserTaskMigration.up();
-
-        AddCurrentUserFieldInTaskTableMigration addCurrentUserFieldInTaskTableMigration = new AddCurrentUserFieldInTaskTableMigration();
-        addCurrentUserFieldInTaskTableMigration.up();
-
-        AddTotalProgressFieldInTasksTableMigration addTotalProgressFieldInTasksTableMigration = new AddTotalProgressFieldInTasksTableMigration();
-        addTotalProgressFieldInTasksTableMigration.up();
-
-        AddStartAndEndTimeInProjectTableMigration addStartAndEndTimeInProjectTableMigration = new AddStartAndEndTimeInProjectTableMigration();
-        addStartAndEndTimeInProjectTableMigration.up();
+        for (IMigration migration: this.migrations) {
+            migration.up();
+        }
     }
 
     public void dropMigrations() throws SQLException {
-        AddStartAndEndTimeInProjectTableMigration addStartAndEndTimeInProjectTableMigration = new AddStartAndEndTimeInProjectTableMigration();
-        addStartAndEndTimeInProjectTableMigration.down();
-
-        AddTotalProgressFieldInTasksTableMigration addTotalProgressFieldInTasksTableMigration = new AddTotalProgressFieldInTasksTableMigration();
-        addTotalProgressFieldInTasksTableMigration.down();     
-
-        AddCurrentUserFieldInTaskTableMigration addCurrentUserFieldInTaskTableMigration = new AddCurrentUserFieldInTaskTableMigration();
-        addCurrentUserFieldInTaskTableMigration.down();
-
-        CreateUserTaskMigration createUserTaskMigration = new CreateUserTaskMigration();
-        createUserTaskMigration.down();
-
-        CreateTasksMigration createTasksMigration = new CreateTasksMigration();
-        createTasksMigration.down();
-
-        CreateProjectMigration createProjectMigration = new CreateProjectMigration();
-        createProjectMigration.down();
-
-        CreateUserMigration createUserMigration = new CreateUserMigration();
-        createUserMigration.down();
+        for (int i = this.migrations.size() - 1; i >= 0; i--) {
+            this.migrations.get(i).down();
+        }
     }
 }
