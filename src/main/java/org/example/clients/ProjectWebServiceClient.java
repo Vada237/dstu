@@ -21,11 +21,5 @@ public class ProjectWebServiceClient {
 
         ProjectWebService projectWebService = service.getPort(ProjectWebService.class);
         System.out.println("Создание проекта");
-        projectWebService.addProject(new Project(
-                0,
-                "test",
-                LocalDateTime.of(2024, Month.NOVEMBER, 1, 12, 0, 0).toString(),
-                LocalDateTime.of(2024, Month.DECEMBER, 5, 12, 0, 0).toString()
-        ));
     }
 }

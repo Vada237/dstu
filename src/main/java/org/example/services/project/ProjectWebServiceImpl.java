@@ -17,7 +17,7 @@ public class ProjectWebServiceImpl implements ProjectWebService {
                         Map.entry("title", project.getTitle()),
                         Map.entry("start_time", LocalDateTime.parse(project.getStartTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))),
                         Map.entry("end_time", LocalDateTime.parse(project.getFinishTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))),
-                        Map.entry("total_hours", project.getTotalHours())
+                        Map.entry("count_hours", project.getTotalHours())
                 )
         );
     }
