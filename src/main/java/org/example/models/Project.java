@@ -6,13 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Project extends Model{
+public class Project extends Model {
     public static String tableName = "projects";
     private int id;
     private String title;
     private List<Task> tasks;
     private String startTime;
     private String finishTime;
+    private int totalHours;
 
     public int getId() {
         return id;
@@ -38,11 +39,12 @@ public class Project extends Model{
         this.tasks = tasks;
     }
 
-    public Project(int id, String title, String startTime, String finishTime) {
+    public Project(int id, String title, String startTime, String finishTime, int totalHours) {
         this.id = id;
         this.title = title;
         this.startTime = startTime;
         this.finishTime = finishTime;
+        this.totalHours = totalHours;
     }
 
     public Project() {
@@ -63,6 +65,14 @@ public class Project extends Model{
 
     public String getFinishTime() {
         return this.finishTime;
+    }
+
+    public int getTotalHours() {
+        return totalHours;
+    }
+
+    public void setTotalHours(int totalHours) {
+        this.totalHours = totalHours;
     }
 
     @Override
@@ -93,11 +103,12 @@ public class Project extends Model{
 
         while (data.next()) {
             projects.add(new Project(
-                data.getInt("id"), 
-            data.getString("title"), 
-            data.getTimestamp("start_time").toString(), 
-            data.getTimestamp("end_time").toString())
-            );
+                    data.getInt("id"),
+                    data.getString("title"),
+                    data.getTimestamp("start_time").toString(),
+                    data.getTimestamp("end_time").toString(),
+                    data.getInt("total_hours")
+            ));
         }
 
         return projects;
