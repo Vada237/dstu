@@ -30,4 +30,9 @@ public class UserWebServiceImpl implements UserWebService {
     public User[] getByFirstAndSecondName(String firstName, String secondName) throws SQLException {
         return User.getByFirstAndSecondName(firstName, secondName).toArray(new User[0]);
     }
+
+    @Override
+    public User[] getAll() throws SQLException {
+        return User.all().toArray(new User[0]);
+    }
 }

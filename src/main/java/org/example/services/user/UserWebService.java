@@ -18,4 +18,6 @@ public interface UserWebService {
     public void deleteUserById(int id) throws SQLException;
     @WebMethod
     public User[] getByFirstAndSecondName(String firstName, String secondName) throws SQLException;
+    @WebMethod
+    public User[] getAll() throws SQLException;
 }
