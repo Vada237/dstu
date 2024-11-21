@@ -22,4 +22,6 @@ public interface TaskWebService {
     public void deleteTaskById(int id) throws SQLException;
     @WebMethod
     public Task[] getByTitle(String title) throws SQLException;
+    @WebMethod
+    public Task[] getAll() throws SQLException;
 }

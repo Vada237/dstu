@@ -48,4 +48,9 @@ public class TaskWebServiceImpl implements TaskWebService {
     public Task[] getByTitle(String title) throws SQLException {
         return Task.getByTitle(title).toArray(new Task[0]);
     }
+
+    @Override
+    public Task[] getAll() throws SQLException {
+        return Task.all().toArray(new Task[0]);
+    }
 }
