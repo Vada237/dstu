@@ -25,7 +25,8 @@ public class UserTaskWebServiceImpl implements UserTaskWebService {
     private final ExecutorService executor = Executors.newFixedThreadPool(Settings.MAX_COUNT_THREAD);
 
     @Override
-    public void trackTime(Task task, int userId, int time, int progress, String createdAt) throws SQLException {
+    public void trackTime(int taskId, int userId, int time, int progress, String createdAt) throws SQLException {
+        Task task = Task.getById(taskId);
         Connection connection = PostgresManager.conn;
         connection.setAutoCommit(false);
 

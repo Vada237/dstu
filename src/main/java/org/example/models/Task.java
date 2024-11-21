@@ -22,6 +22,8 @@ public class Task extends Model {
     private int projectId;
     private int totalProgress;
 
+    private int countHours;
+
     public Project getProject() {
         return project;
     }
@@ -94,6 +96,22 @@ public class Task extends Model {
         this.projectId = projectId;
     }
 
+    public static String getTableName() {
+        return tableName;
+    }
+
+    public static void setTableName(String tableName) {
+        Task.tableName = tableName;
+    }
+
+    public int getCountHours() {
+        return countHours;
+    }
+
+    public void setCountHours(int countHours) {
+        this.countHours = countHours;
+    }
+
     public int getTotalProgress() {
         return this.totalProgress;
     }
@@ -113,7 +131,8 @@ public class Task extends Model {
             String status,
             User user,
             Project project,
-            int totalProgress
+            int totalProgress,
+            int countHours
     ) {
         this.title = title;
         this.startTime = startTime;
@@ -124,6 +143,7 @@ public class Task extends Model {
         this.project = project;
         this.projectId = project.getId();
         this.totalProgress = totalProgress;
+        this.countHours = countHours;
     }
 
     public Task(
@@ -131,7 +151,8 @@ public class Task extends Model {
             String startTime,
             String finishTime,
             int userId,
-            int projectId
+            int projectId,
+            int totalHours
     ) {
         this.title =title;
         this.startTime = startTime;
@@ -140,6 +161,7 @@ public class Task extends Model {
         this.userId = userId;
         this.projectId = projectId;
         this.totalProgress = 0;
+        this.countHours = totalHours;
     }
 
     public Task() {
@@ -208,7 +230,8 @@ public class Task extends Model {
                     data.getString("status"),
                     currentUser,
                     project,
-                    data.getInt("total_progress")
+                    data.getInt("total_progress"),
+                    data.getInt("count_hours")
             );
             task.setId(data.getInt("id"));
             tasks.add(task);

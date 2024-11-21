@@ -11,5 +11,5 @@ import java.sql.SQLException;
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public interface UserTaskWebService {
     @WebMethod
-    public void trackTime(Task task,int userId, int time, int progress, String createdAt) throws SQLException;
+    public void trackTime(int taskId, int userId, int time, int progress, String createdAt) throws SQLException;
 }

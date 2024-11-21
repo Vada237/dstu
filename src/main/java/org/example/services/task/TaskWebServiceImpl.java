@@ -1,5 +1,6 @@
 package org.example.services.task;
 
+import org.example.enums.TaskStatus;
 import org.example.models.Task;
 
 import javax.jws.WebService;
@@ -31,9 +32,10 @@ public class TaskWebServiceImpl implements TaskWebService {
                 Map.entry("title", task.getTitle()),
                 Map.entry("start_time", LocalDateTime.parse(task.getStartTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))),
                 Map.entry("end_time", LocalDateTime.parse(task.getFinishTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))),
-                Map.entry("status", task.getStatus()),
+                Map.entry("status", TaskStatus.OPEN.name()),
                 Map.entry("project_id", task.getProjectId()),
-                Map.entry("current_user_id", task.getUserId())
+                Map.entry("current_user_id", task.getUserId()),
+                Map.entry("count_hours", task.getCountHours())
         ));
     }
 
