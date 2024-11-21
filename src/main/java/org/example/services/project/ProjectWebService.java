@@ -12,4 +12,7 @@ import java.sql.SQLException;
 public interface ProjectWebService {
     @WebMethod
     public void addProject(Project project) throws SQLException;
+
+    @WebMethod
+    public Project[] getProjects() throws Exception;
 }

@@ -1,5 +1,6 @@
 package org.example.models;
 
+import org.example.enums.TaskStatus;
 import org.example.managers.PostgresManager;
 
 import java.sql.ResultSet;
@@ -121,8 +122,24 @@ public class Task extends Model {
         this.user = user;
         this.userId = user.getId();
         this.project = project;
-        this.projectId = project.getId();        
+        this.projectId = project.getId();
         this.totalProgress = totalProgress;
+    }
+
+    public Task(
+            String title,
+            String startTime,
+            String finishTime,
+            int userId,
+            int projectId
+    ) {
+        this.title =title;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
+        this.status = TaskStatus.OPEN.name();
+        this.userId = userId;
+        this.projectId = projectId;
+        this.totalProgress = 0;
     }
 
     public Task() {
@@ -192,7 +209,7 @@ public class Task extends Model {
                     currentUser,
                     project,
                     data.getInt("total_progress")
-                    );
+            );
             task.setId(data.getInt("id"));
             tasks.add(task);
         }
@@ -203,7 +220,7 @@ public class Task extends Model {
     public static void UpdateProgress(Task task, int progress) throws SQLException {
         Object[] params = new Object[2];
         task.setTotalProgress(task.getTotalProgress() + progress);
-        
+
         params[0] = task.getTotalProgress();
         params[1] = task.getId();
 

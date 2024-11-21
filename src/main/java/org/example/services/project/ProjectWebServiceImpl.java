@@ -21,4 +21,9 @@ public class ProjectWebServiceImpl implements ProjectWebService {
                 )
         );
     }
+
+    @Override
+    public Project[] getProjects() throws Exception {
+        return Project.all().toArray(new Project[0]);
+    }
 }

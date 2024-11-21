@@ -107,7 +107,7 @@ public class Project extends Model {
                     data.getString("title"),
                     data.getTimestamp("start_time").toString(),
                     data.getTimestamp("end_time").toString(),
-                    data.getInt("total_hours")
+                    data.getInt("count_hours")
             ));
         }
 
